@@ -1,0 +1,325 @@
+{
+  "abstract" : [
+    {
+      "text" : "Create apps for macOS, iOS, tvOS, Linux and Windows with Swift Package Manager.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/swift-bundler\/documentation\/swift-bundler"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "swift-bundler",
+    "modules" : [
+      {
+        "name" : "swift-bundler"
+      }
+    ],
+    "role" : "collection",
+    "roleHeading" : "Command-line Tool",
+    "symbolKind" : "module",
+    "title" : "swift-bundler"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Swift Bundler builds on top of the Swift Package Manager to enable truly cross-platform development in Swift. It provides a consistent experience across platforms while allowing you to configure platform-specific details when needed.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Apps built with Swift Bundler work everywhere by default, within the limits of your chosen UI framework of course. We recommend using ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "https:\/\/github.com\/moreSwift\/swift-cross-ui",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " because:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "It provides a native user experience across all platforms supported by Swift Bundler",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            },
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "It’s the most mature cross-platform UI framework for Swift (out of those with at least as many supported platforms)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "That said, Swift Bundler doesn’t lock you into any particular framework; everything is open and extensible.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Getting-started",
+      "identifiers" : [
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/installation",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/creating-an-app",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/configuration",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/bundlers",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/package-templates"
+      ],
+      "title" : "Getting started"
+    },
+    {
+      "anchor" : "Advanced-usage",
+      "identifiers" : [
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/custom-templates",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/metal-shaders",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/mac-catalyst",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/stand-alone-apps",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/troubleshooting"
+      ],
+      "title" : "Advanced usage"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/swift-bundler"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://swift-bundler/documentation/swift-bundler/bundlers": {
+  "abstract" : [
+    {
+      "text" : "Swift Bundler supports a variety of bundle formats.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/bundlers",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Bundlers",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/bundlers"
+},
+"doc://swift-bundler/documentation/swift-bundler/configuration": {
+  "abstract" : [
+    {
+      "text" : "Configuring your app.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/configuration",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Configuration",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/configuration"
+},
+"doc://swift-bundler/documentation/swift-bundler/creating-an-app": {
+  "abstract" : [
+    {
+      "text" : "Creating a hello world app.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/creating-an-app",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Creating an app",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/creating-an-app"
+},
+"doc://swift-bundler/documentation/swift-bundler/custom-templates": {
+  "abstract" : [
+    {
+      "text" : "Custom templates are a great way to tailor Swift Bundler to your workflow.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/custom-templates",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Custom templates",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/custom-templates"
+},
+"doc://swift-bundler/documentation/swift-bundler/installation": {
+  "abstract" : [
+    {
+      "text" : "Installing Swift Bundler on your system.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/installation",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Installation",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/installation"
+},
+"doc://swift-bundler/documentation/swift-bundler/mac-catalyst": {
+  "abstract" : [
+    {
+      "text" : "Targeting Mac Catalyst.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/mac-catalyst",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Mac Catalyst",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/mac-catalyst"
+},
+"doc://swift-bundler/documentation/swift-bundler/metal-shaders": {
+  "abstract" : [
+    {
+      "text" : "Using Metal shaders with Swift Bundler.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/metal-shaders",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Metal shaders",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/metal-shaders"
+},
+"doc://swift-bundler/documentation/swift-bundler/package-templates": {
+  "abstract" : [
+    {
+      "text" : "Easily create common types of apps from templates.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/package-templates",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Package templates",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/package-templates"
+},
+"doc://swift-bundler/documentation/swift-bundler/stand-alone-apps": {
+  "abstract" : [
+    {
+      "text" : "What is a stand-alone app, and how you can make one.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/stand-alone-apps",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Stand alone apps",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/stand-alone-apps"
+},
+"doc://swift-bundler/documentation/swift-bundler/troubleshooting": {
+  "abstract" : [
+    {
+      "text" : "Troubleshooting common issues.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/troubleshooting",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Troubleshooting",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/troubleshooting"
+},
+"doc://swift-bundler/documentation/swift-bundler": {
+  "abstract" : [
+    {
+      "text" : "Create apps for macOS, iOS, tvOS, Linux and Windows with Swift Package Manager.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "swift-bundler",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler"
+},
+"https://github.com/moreSwift/swift-cross-ui": {
+  "identifier" : "https:\/\/github.com\/moreSwift\/swift-cross-ui",
+  "title" : "SwiftCrossUI",
+  "titleInlineContent" : [
+    {
+      "text" : "SwiftCrossUI",
+      "type" : "text"
+    }
+  ],
+  "type" : "link",
+  "url" : "https:\/\/github.com\/moreSwift\/swift-cross-ui"
+}
+}
+}

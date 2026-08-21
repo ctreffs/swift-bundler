@@ -8,19 +8,19 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/SwiftBundler\/documentation\/SwiftBundler"
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/package-templates"
+    "url" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/package-templates"
   },
   "kind" : "article",
   "metadata" : {
     "modules" : [
       {
-        "name" : "SwiftBundler"
+        "name" : "swift-bundler"
       }
     ],
     "role" : "article",
@@ -82,7 +82,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler-templates",
+              "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler-templates",
               "isActive" : true,
               "type" : "reference"
             },
@@ -138,7 +138,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/custom-templates",
+              "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/custom-templates",
               "isActive" : true,
               "type" : "reference"
             },
@@ -183,10 +183,23 @@
   "sections" : [
 
   ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Getting-started",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/installation",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/creating-an-app",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/configuration",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/bundlers"
+      ],
+      "title" : "Getting started"
+    }
+  ],
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/swiftbundler\/package-templates"
+        "\/documentation\/swift-bundler\/package-templates"
       ],
       "traits" : [
         {
@@ -197,36 +210,92 @@
   ]
 , 
 "references": {
-"doc://SwiftBundler/documentation/SwiftBundler": {
+"doc://swift-bundler/documentation/swift-bundler/bundlers": {
   "abstract" : [
     {
-      "text" : "Create macOS apps with Swift packages instead of Xcode projects.",
+      "text" : "Swift Bundler supports a variety of bundle formats.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler",
-  "kind" : "symbol",
-  "role" : "collection",
-  "title" : "SwiftBundler",
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/bundlers",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Bundlers",
   "type" : "topic",
-  "url" : "\/documentation\/swiftbundler"
+  "url" : "\/documentation\/swift-bundler\/bundlers"
 },
-"doc://SwiftBundler/documentation/SwiftBundler/custom-templates": {
+"doc://swift-bundler/documentation/swift-bundler/configuration": {
+  "abstract" : [
+    {
+      "text" : "Configuring your app.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/configuration",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Configuration",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/configuration"
+},
+"doc://swift-bundler/documentation/swift-bundler/creating-an-app": {
+  "abstract" : [
+    {
+      "text" : "Creating a hello world app.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/creating-an-app",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Creating an app",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/creating-an-app"
+},
+"doc://swift-bundler/documentation/swift-bundler/custom-templates": {
   "abstract" : [
     {
       "text" : "Custom templates are a great way to tailor Swift Bundler to your workflow.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/custom-templates",
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/custom-templates",
   "kind" : "article",
   "role" : "article",
   "title" : "Custom templates",
   "type" : "topic",
-  "url" : "\/documentation\/swiftbundler\/custom-templates"
+  "url" : "\/documentation\/swift-bundler\/custom-templates"
 },
-"https://github.com/stackotter/swift-bundler-templates": {
-  "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler-templates",
+"doc://swift-bundler/documentation/swift-bundler/installation": {
+  "abstract" : [
+    {
+      "text" : "Installing Swift Bundler on your system.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/installation",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Installation",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/installation"
+},
+"doc://swift-bundler/documentation/swift-bundler": {
+  "abstract" : [
+    {
+      "text" : "Create apps for macOS, iOS, tvOS, Linux and Windows with Swift Package Manager.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "swift-bundler",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler"
+},
+"https://github.com/moreSwift/swift-bundler-templates": {
+  "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler-templates",
   "title" : "the swift-bundler-templates repository",
   "titleInlineContent" : [
     {
@@ -235,7 +304,7 @@
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/github.com\/stackotter\/swift-bundler-templates"
+  "url" : "https:\/\/github.com\/moreSwift\/swift-bundler-templates"
 }
 }
 }

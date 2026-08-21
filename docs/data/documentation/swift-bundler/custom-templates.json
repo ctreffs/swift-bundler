@@ -8,19 +8,19 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/SwiftBundler\/documentation\/SwiftBundler"
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/custom-templates"
+    "url" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/custom-templates"
   },
   "kind" : "article",
   "metadata" : {
     "modules" : [
       {
-        "name" : "SwiftBundler"
+        "name" : "swift-bundler"
       }
     ],
     "role" : "article",
@@ -43,7 +43,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler-templates",
+              "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler-templates",
               "isActive" : true,
               "type" : "reference"
             },
@@ -298,7 +298,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler-templates",
+              "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler-templates",
               "isActive" : true,
               "overridingTitle" : "the swift-bundler-templates repository",
               "overridingTitleInlineContent" : [
@@ -346,7 +346,10 @@
       "anchor" : "Advanced-usage",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/metal-shaders"
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/metal-shaders",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/mac-catalyst",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/stand-alone-apps",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/troubleshooting"
       ],
       "title" : "Advanced usage"
     }
@@ -354,7 +357,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/swiftbundler\/custom-templates"
+        "\/documentation\/swift-bundler\/custom-templates"
       ],
       "traits" : [
         {
@@ -365,36 +368,78 @@
   ]
 , 
 "references": {
-"doc://SwiftBundler/documentation/SwiftBundler": {
+"doc://swift-bundler/documentation/swift-bundler/mac-catalyst": {
   "abstract" : [
     {
-      "text" : "Create macOS apps with Swift packages instead of Xcode projects.",
+      "text" : "Targeting Mac Catalyst.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler",
-  "kind" : "symbol",
-  "role" : "collection",
-  "title" : "SwiftBundler",
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/mac-catalyst",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Mac Catalyst",
   "type" : "topic",
-  "url" : "\/documentation\/swiftbundler"
+  "url" : "\/documentation\/swift-bundler\/mac-catalyst"
 },
-"doc://SwiftBundler/documentation/SwiftBundler/metal-shaders": {
+"doc://swift-bundler/documentation/swift-bundler/metal-shaders": {
   "abstract" : [
     {
       "text" : "Using Metal shaders with Swift Bundler.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/metal-shaders",
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/metal-shaders",
   "kind" : "article",
   "role" : "article",
   "title" : "Metal shaders",
   "type" : "topic",
-  "url" : "\/documentation\/swiftbundler\/metal-shaders"
+  "url" : "\/documentation\/swift-bundler\/metal-shaders"
 },
-"https://github.com/stackotter/swift-bundler-templates": {
-  "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler-templates",
+"doc://swift-bundler/documentation/swift-bundler/stand-alone-apps": {
+  "abstract" : [
+    {
+      "text" : "What is a stand-alone app, and how you can make one.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/stand-alone-apps",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Stand alone apps",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/stand-alone-apps"
+},
+"doc://swift-bundler/documentation/swift-bundler/troubleshooting": {
+  "abstract" : [
+    {
+      "text" : "Troubleshooting common issues.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/troubleshooting",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Troubleshooting",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/troubleshooting"
+},
+"doc://swift-bundler/documentation/swift-bundler": {
+  "abstract" : [
+    {
+      "text" : "Create apps for macOS, iOS, tvOS, Linux and Windows with Swift Package Manager.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "swift-bundler",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler"
+},
+"https://github.com/moreSwift/swift-bundler-templates": {
+  "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler-templates",
   "title" : "the swift-bundler-templates repository",
   "titleInlineContent" : [
     {
@@ -403,7 +448,7 @@
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/github.com\/stackotter\/swift-bundler-templates"
+  "url" : "https:\/\/github.com\/moreSwift\/swift-bundler-templates"
 }
 }
 }

@@ -8,19 +8,19 @@
   "hierarchy" : {
     "paths" : [
       [
-        "doc:\/\/SwiftBundler\/documentation\/SwiftBundler"
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/configuration"
+    "url" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/configuration"
   },
   "kind" : "article",
   "metadata" : {
     "modules" : [
       {
-        "name" : "SwiftBundler"
+        "name" : "swift-bundler"
       }
     ],
     "role" : "article",
@@ -83,19 +83,43 @@
             "# `HelloWorld` here is the app's name. Use double quotes if your app's name",
             "# contains special characters such as spaces.",
             "[apps.HelloWorld]",
-            "# The SwiftPM package executable product to bundle",
-            "product = \"HelloWorld\"",
-            "# The app's version, displayed on macOS's automatic 'About HelloWorld' screen.",
-            "version = \"0.1.0\"",
             "# The app's identifier, used by bundlers which require reverse domain name",
             "# identifiers.",
             "identifier = \"com.example.HelloWorld\"",
+            "# The SwiftPM package executable product to bundle",
+            "product = \"HelloWorld\"",
+            "# The app's version. Displayed on macOS's automatic 'About HelloWorld' screen.",
+            "version = \"0.1.0\"",
+            "# The app's description. Displayed by some package managers.",
+            "description = \"A basic app.\"",
+            "# The license used by the app. Using SPDX identifiers is recommended.",
+            "license = \"MIT\"",
             "# Only used by the Darwin bundler at the moment. Corresponds to Apple's category",
             "# identifiers. See https:\/\/developer.apple.com\/documentation\/bundleresources\/information-property-list\/lsapplicationcategorytype",
             "category = \"public.app-category.education\" # Optional",
-            "# The app's icon. Must be a 1024x1024px PNG file, or a `.icns` file. `.icns`",
-            "# files only work on Apple platforms.",
+            "# The app's icon.",
+            "# Can be any of the following formats:",
+            "# - 1024x1024px PNG file (`.png`)",
+            "# - ICNS file (`.icns`) (Apple platforms only)",
+            "# - Icon Composer file (`.icon`) (Apple platforms only)",
             "icon = \"icon.png\" # Optional",
+            "# Custom URL schemes supported by the app (for deep linking). Swift Bundler",
+            "# sets up the required metadata to get such URL schemes redirected to your",
+            "# app. It's up to your app to handle the different ways that platforms deliver",
+            "# custom URL events, or to use a cross platform framework such as SwiftCrossUI",
+            "# that can handle those differences on your behalf.",
+            "url_schemes = [\"hello\"]",
+            "# Build dependencies (outside of those handled by SwiftPM). Dependencies without",
+            "# dots are interpreted as executable products to include from the root SwiftPM",
+            "# package as helper executables (placed next to the main executable). Dependencies",
+            "# with a dot are interpreted as either library or executable products to include",
+            "# from a subproject. This allows pulling cmake dependencies into Swift Bundler",
+            "# projects. This is often used to pull in libsentry. Pulling in external library",
+            "# products requires that your app imports a SwiftPM library target\/product",
+            "# containing a 'module.modulemap' instructing SwiftPM what to link against.",
+            "# See https:\/\/github.com\/moreSwift\/swift-bundler\/tree\/main\/Tests\/SwiftBundlerTests\/Fixtures\/MakefileBuilder",
+            "# for a working example.",
+            "dependencies = [\"Updater\", \"cmakeproj.hello\"]",
             "",
             "# Extra entries for your app's Info.plist file. Currently has no effect on",
             "# Linux.",
@@ -104,13 +128,83 @@
             "# example. Patterns of the form `$(...)` get replaced with their corresponding",
             "# values. See 'Variable substitutions' below.",
             "CFBundleShortVersionString = \"$(VERSION)_$(COMMIT_HASH)\"",
-            "# You can also define many other kinds of complex fields that you want. Below",
-            "# is how you would specify a list of URL schemes (http, ftp, and so on)",
-            "# supported by a macOS app.",
-            "CFBundleURLTypes = [ { type = \"dict\", value = { CFBundleTypeRole = 'Viewer', CFBundleURLName = 'HelloWorld', CFBundleURLSchemes = [ 'helloworld' ] } } ]"
+            "",
+            "# Define platform-specific or bundler-specific configuration properties using",
+            "# conditional overlays.",
+            "[[apps.HelloWorld.overlays]]",
+            "condition = \"platform(linux)\"",
+            "# Generate a D-Bus service file for the app. This allows the app to handle URL",
+            "# schemes.",
+            "dbus_activatable = true",
+            "# You can also use overlays to provide platform-specific overrides for general",
+            "# configuration properties.",
+            "url_schemes = [\"hello\", \"hello-linux\"]",
+            "",
+            "[[apps.HelloWorld.overlays]]",
+            "condition = \"bundler(linuxRPM)\"",
+            "# Specify external packages required by the app. This property is currently",
+            "# only available when using the linuxRPM bundler.",
+            "requirements = [\"gtk3\"]",
+            "",
+            "[[apps.HelloWorld.overlays]]",
+            "condition = \"platform(macCatalyst)\"",
+            "# Specify the interface idiom used by the app when run under Mac Catalyst.",
+            "# Respected by UIKit. Value must be `ipad` (Scaled to Match iPad) or `mac`",
+            "# (Optimize for Mac).",
+            "interface_idiom = \"mac\"",
+            "",
+            "# Subprojects are dependencies or constituent parts of a project that fall",
+            "# outside of the reign of SwiftPM. They can use custom builders and can build",
+            "# from either local or git sources.",
+            "[projects.cmakeproj]",
+            "# The subprojects source directory. Can be `local(...)` (a path) or",
+            "# `git(...)` (a git url). When using a `git` source, you must specify a",
+            "# revision via the separate `revision` config property.",
+            "source = \"local(.\/cmakeproj)\"",
+            "# Builder to use when building products of the project",
+            "builder = \"CMakeBuilder\"",
+            "",
+            "# Projects can define as many products as they want. Library products are built",
+            "# and inserted into SwiftPM's build directory so that they can be found when",
+            "# the app's product gets built. All you need to do is include the header in your",
+            "# product and Swift Bundler makes sure that the linking just works. Executable",
+            "# products get included as helper executables next to the main executable",
+            "# (regardless of bundler). Overlays can be used to override `type` and",
+            "# `output_directory` depending on platform (see the overlay example for the",
+            "# HelloWorld app above).",
+            "[projects.cmakeproj.products.hello]",
+            "# The type of product. One of `dynamicLibrary`, `staticLibrary` or `executable`.",
+            "type = \"dynamicLibrary\"",
+            "# The directory within the build directory to look for the built product. Swift",
+            "# Bundler passes a build directory to the builder which the builder is expected",
+            "# to build into, but sometimes the products may exist within some sort of nested",
+            "# directory structure. Defaults to `.`",
+            "output_directory = \".\"",
+            "",
+            "# Builders are used to build subprojects.",
+            "[builders.CMakeBuilder]",
+            "# The name of the SwiftPM executable product containing the builder implementation.",
+            "product = \"CMakeBuilder\"",
+            "# The type of builder. Currently `wholeProject` is the only option. That is,",
+            "# when invoked the builder must just build all required products.",
+            "kind = \"wholeProject\""
           ],
           "syntax" : "toml",
           "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Bundler.toml",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            }
+          ],
+          "type" : "paragraph"
         },
         {
           "content" : [
@@ -153,6 +247,71 @@
           "type" : "aside"
         },
         {
+          "inlineContent" : [
+            {
+              "text" : "For the sake of completeness, here’s the source code for the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "code" : "Sources\/CMakeBuilder\/CMakeBuilder.swift",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " builder product referred to by the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "example configuration.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "import SwiftBundlerBuilders",
+            "",
+            "@main",
+            "struct CMakeBuilder: Builder {",
+            "    static func build(_ context: some BuilderContext) async throws -> BuilderResult {",
+            "        try await context.run(",
+            "            \"cmake\",",
+            "            [\"-B\", context.buildDirectory.path]",
+            "        )",
+            "        try await context.run(",
+            "            \"cmake\",",
+            "            [\"--build\", context.buildDirectory.path, \"--target\", \"hello\"]",
+            "        )",
+            "        return BuilderResult()",
+            "    }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "Sources\/CMakeBuilder\/CMakeBuilder.swift",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
           "anchor" : "Schema",
           "level" : 2,
           "text" : "Schema",
@@ -173,7 +332,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler\/blob\/main\/Bundler.schema.json",
+              "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler\/blob\/main\/Bundler.schema.json",
               "isActive" : true,
               "type" : "reference"
             },
@@ -203,7 +362,7 @@
               "type" : "text"
             },
             {
-              "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler\/blob\/main\/generate_schema.sh",
+              "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler\/blob\/main\/generate_schema.sh",
               "isActive" : true,
               "type" : "reference"
             },
@@ -260,31 +419,84 @@
         {
           "inlineContent" : [
             {
-              "text" : "Icons can either be ",
+              "text" : "Icons can be provided in any of the following formats:",
               "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "items" : [
+            {
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "1024x1024px PNG file (",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : ".png",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ")",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
             },
             {
-              "code" : ".icns",
-              "type" : "codeVoice"
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "ICNS file (",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : ".icns",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ") (Apple platforms only)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
             },
             {
-              "text" : " files or 1024x1024px ",
-              "type" : "text"
-            },
+              "content" : [
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "Icon Composer file (",
+                      "type" : "text"
+                    },
+                    {
+                      "code" : ".icon",
+                      "type" : "codeVoice"
+                    },
+                    {
+                      "text" : ") (Apple platforms only)",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "paragraph"
+                }
+              ]
+            }
+          ],
+          "type" : "unorderedList"
+        },
+        {
+          "inlineContent" : [
             {
-              "code" : ".png",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " files. ",
-              "type" : "text"
-            },
-            {
-              "code" : ".icns",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " is not",
+              "text" : "Overlays can be used to specify an ICNS or Icon Composer icons on Apple platforms",
               "type" : "text"
             },
             {
@@ -292,39 +504,28 @@
               "type" : "text"
             },
             {
-              "text" : "compatible with Linux. If you want cross-platform support or you want to use",
+              "text" : "only:",
               "type" : "text"
-            },
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "[apps.Example]",
+            "icon = \"AppIcon.png\"",
+            "",
+            "[[apps.Example.overlays]]",
+            "condition = \"platform(macOS)\"",
+            "icon = \"AppIcon.icon\""
+          ],
+          "syntax" : "toml",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
             {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "the same icon for all screen resolutions, provide the icon as a ",
-              "type" : "text"
-            },
-            {
-              "code" : ".png",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " file.",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "Otherwise use a ",
-              "type" : "text"
-            },
-            {
-              "code" : ".icns",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " file. The easiest method for creating an ",
+              "text" : "The easiest method to create an ",
               "type" : "text"
             },
             {
@@ -332,15 +533,7 @@
               "type" : "codeVoice"
             },
             {
-              "text" : " file is",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "to create an ",
+              "text" : " file is to create an ",
               "type" : "text"
             },
             {
@@ -348,7 +541,15 @@
               "type" : "codeVoice"
             },
             {
-              "text" : " using Xcode and then run the following command.",
+              "text" : " using Xcode",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "and then convert it using the following command:",
               "type" : "text"
             }
           ],
@@ -1192,8 +1393,10 @@
       "anchor" : "Getting-started",
       "generated" : true,
       "identifiers" : [
-        "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/installation",
-        "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/creating-an-app"
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/installation",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/creating-an-app",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/bundlers",
+        "doc:\/\/swift-bundler\/documentation\/swift-bundler\/package-templates"
       ],
       "title" : "Getting started"
     }
@@ -1201,7 +1404,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/swiftbundler\/configuration"
+        "\/documentation\/swift-bundler\/configuration"
       ],
       "traits" : [
         {
@@ -1224,50 +1427,78 @@
   "type" : "link",
   "url" : "#Variable-substitutions"
 },
-"doc://SwiftBundler/documentation/SwiftBundler": {
+"doc://swift-bundler/documentation/swift-bundler/bundlers": {
   "abstract" : [
     {
-      "text" : "Create macOS apps with Swift packages instead of Xcode projects.",
+      "text" : "Swift Bundler supports a variety of bundle formats.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler",
-  "kind" : "symbol",
-  "role" : "collection",
-  "title" : "SwiftBundler",
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/bundlers",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Bundlers",
   "type" : "topic",
-  "url" : "\/documentation\/swiftbundler"
+  "url" : "\/documentation\/swift-bundler\/bundlers"
 },
-"doc://SwiftBundler/documentation/SwiftBundler/creating-an-app": {
+"doc://swift-bundler/documentation/swift-bundler/creating-an-app": {
   "abstract" : [
     {
       "text" : "Creating a hello world app.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/creating-an-app",
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/creating-an-app",
   "kind" : "article",
   "role" : "article",
   "title" : "Creating an app",
   "type" : "topic",
-  "url" : "\/documentation\/swiftbundler\/creating-an-app"
+  "url" : "\/documentation\/swift-bundler\/creating-an-app"
 },
-"doc://SwiftBundler/documentation/SwiftBundler/installation": {
+"doc://swift-bundler/documentation/swift-bundler/installation": {
   "abstract" : [
     {
       "text" : "Installing Swift Bundler on your system.",
       "type" : "text"
     }
   ],
-  "identifier" : "doc:\/\/SwiftBundler\/documentation\/SwiftBundler\/installation",
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/installation",
   "kind" : "article",
   "role" : "article",
   "title" : "Installation",
   "type" : "topic",
-  "url" : "\/documentation\/swiftbundler\/installation"
+  "url" : "\/documentation\/swift-bundler\/installation"
 },
-"https://github.com/stackotter/swift-bundler/blob/main/Bundler.schema.json": {
-  "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler\/blob\/main\/Bundler.schema.json",
+"doc://swift-bundler/documentation/swift-bundler/package-templates": {
+  "abstract" : [
+    {
+      "text" : "Easily create common types of apps from templates.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler\/package-templates",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Package templates",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler\/package-templates"
+},
+"doc://swift-bundler/documentation/swift-bundler": {
+  "abstract" : [
+    {
+      "text" : "Create apps for macOS, iOS, tvOS, Linux and Windows with Swift Package Manager.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/swift-bundler\/documentation\/swift-bundler",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "swift-bundler",
+  "type" : "topic",
+  "url" : "\/documentation\/swift-bundler"
+},
+"https://github.com/moreSwift/swift-bundler/blob/main/Bundler.schema.json": {
+  "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler\/blob\/main\/Bundler.schema.json",
   "title" : "Bundler.schema.json",
   "titleInlineContent" : [
     {
@@ -1276,10 +1507,10 @@
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/github.com\/stackotter\/swift-bundler\/blob\/main\/Bundler.schema.json"
+  "url" : "https:\/\/github.com\/moreSwift\/swift-bundler\/blob\/main\/Bundler.schema.json"
 },
-"https://github.com/stackotter/swift-bundler/blob/main/generate_schema.sh": {
-  "identifier" : "https:\/\/github.com\/stackotter\/swift-bundler\/blob\/main\/generate_schema.sh",
+"https://github.com/moreSwift/swift-bundler/blob/main/generate_schema.sh": {
+  "identifier" : "https:\/\/github.com\/moreSwift\/swift-bundler\/blob\/main\/generate_schema.sh",
   "title" : "generate_schema.sh",
   "titleInlineContent" : [
     {
@@ -1288,7 +1519,7 @@
     }
   ],
   "type" : "link",
-  "url" : "https:\/\/github.com\/stackotter\/swift-bundler\/blob\/main\/generate_schema.sh"
+  "url" : "https:\/\/github.com\/moreSwift\/swift-bundler\/blob\/main\/generate_schema.sh"
 }
 }
 }
