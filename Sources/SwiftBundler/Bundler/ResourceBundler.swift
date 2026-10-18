@@ -86,7 +86,7 @@ enum ResourceBundler {
         continue
       }
 
-      if !fixBundles {
+      if !fixBundles || isStructuredBundle(file, for: platform) {
         try copyResourceBundle(
           file,
           to: destinationDirectory
@@ -250,6 +250,35 @@ enum ResourceBundler {
   }
 
   // MARK: Private methods
+
+  /// Checks whether a resource bundle already has the structure of a bundle
+  /// built by Xcode, i.e. it contains an `Info.plist` where the platform
+  /// expects one.
+  ///
+  /// SwiftPM's native build system produces flat bundles, which need fixing.
+  /// Its `swiftbuild` build system produces structured bundles (for example
+  /// `Contents/Info.plist` and `Contents/Resources` on macOS), which must be
+  /// copied unchanged. Fixing them would nest their contents in a second
+  /// `Contents/Resources` directory.
+  /// - Parameters:
+  ///   - bundle: The bundle to check.
+  ///   - platform: The platform that the app should run on.
+  /// - Returns: `true` if the bundle is already structured.
+  private static func isStructuredBundle(
+    _ bundle: URL,
+    for platform: Platform
+  ) -> Bool {
+    let infoPlist: URL
+    switch platform {
+      case .macOS, .macCatalyst:
+        infoPlist = bundle / "Contents/Info.plist"
+      case .iOS, .iOSSimulator, .visionOS, .visionOSSimulator, .tvOS, .tvOSSimulator:
+        infoPlist = bundle / "Info.plist"
+      case .linux, .windows, .android:
+        return false
+    }
+    return infoPlist.exists()
+  }
 
   /// Creates the directory structure for the specified resource bundle directory.
   ///
