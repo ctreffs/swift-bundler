@@ -180,6 +180,11 @@ enum DarwinBundler: Bundler {
         platformVersion: additionalContext.platformVersion,
         packageName: context.packageName,
         productName: context.appConfiguration.product,
+        productBundleNames: try ResourceBundler.resourceBundleNames(
+          ofProduct: context.appConfiguration.product,
+          in: context.packageGraph,
+          platform: context.platform
+        ),
         iconURL: appIconURL
       )
     } catch {

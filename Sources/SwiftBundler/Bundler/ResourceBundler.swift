@@ -52,6 +52,10 @@ enum ResourceBundler {
   ///   - platformVersion: The minimum platform version that the app should run on.
   ///   - packageName: The name of the package this app is in.
   ///   - productName: The name of the app's product.
+  ///   - productBundleNames: The file names of the resource bundles that
+  ///     belong to the product's targets (see ``resourceBundleNames(ofProduct:in:platform:)``).
+  ///     Other bundles in the source directory, such as those of test targets,
+  ///     are not copied.
   ///   - iconURL: An optional icon URL to include in the main bundle's Assets.car.
   static func copyResources(
     from sourceDirectory: URL,
@@ -61,9 +65,11 @@ enum ResourceBundler {
     platformVersion: String,
     packageName: String,
     productName: String,
+    productBundleNames: Set<String>,
     iconURL: URL?
   ) async throws(Error) {
     let mainBundleName = "\(packageName)_\(productName)"
+    let bundleNames = productBundleNames.union(["\(mainBundleName).bundle"])
 
     // When using Layered icons, create the main bundle if it doesn't exist
     if iconURL?.pathExtension.lowercased() == "icon" {
@@ -86,6 +92,13 @@ enum ResourceBundler {
         continue
       }
 
+      // The products directory is shared by every product and test target
+      // built in the package, so only copy the bundles this product uses.
+      guard bundleNames.contains(file.lastPathComponent) else {
+        log.debug("Skipping resource bundle '\(file.lastPathComponent)' (not used by the product)")
+        continue
+      }
+
       if !fixBundles {
         try copyResourceBundle(
           file,
@@ -102,6 +115,35 @@ enum ResourceBundler {
           iconURL: iconURL
         )
       }
+    }
+  }
+
+  /// Gets the file names of the resource bundles that SwiftPM builds for a
+  /// product: `<PackageName>_<TargetName>.bundle` for every target that the
+  /// product depends on (directly or transitively) on the given platform.
+  /// - Parameters:
+  ///   - product: The product, located in the package graph's root package.
+  ///   - packageGraph: The package graph containing the product.
+  ///   - platform: The platform that the app should run on.
+  /// - Returns: The bundle file names.
+  static func resourceBundleNames(
+    ofProduct product: String,
+    in packageGraph: SwiftPackageManager.PackageGraph,
+    platform: Platform
+  ) throws(Error) -> Set<String> {
+    try Error.catch(withMessage: .failedToDetermineProductResourceBundles(product: product)) {
+      let targets = try packageGraph.transitiveActiveTargets(
+        inProduct: product,
+        inPackage: packageGraph.rootPackage.reference,
+        targetPlatform: platform
+      )
+
+      var names: Set<String> = []
+      for target in targets {
+        let package = try packageGraph.package(referredToBy: target.package)
+        names.insert("\(package.name)_\(target.name).bundle")
+      }
+      return names
     }
   }
 

@@ -17,6 +17,7 @@ extension ResourceBundler {
     case failedToDeleteAssetCatalog(URL)
     case failedToCompileStringsCatalogs
     case failedToCompileStoryboards
+    case failedToDetermineProductResourceBundles(product: String)
 
     var userFriendlyMessage: String {
       switch self {
@@ -51,6 +52,8 @@ extension ResourceBundler {
           return "Failed to compile strings catalogs"
         case .failedToCompileStoryboards:
           return "Failed to compile storyboards"
+        case .failedToDetermineProductResourceBundles(let product):
+          return "Failed to determine the resource bundles of product '\(product)'"
       }
     }
   }
